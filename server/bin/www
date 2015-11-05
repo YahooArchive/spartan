@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+//
+// Copyright 2015, Yahoo Inc.
+// Copyrights licensed under the New BSD License. See the
+// accompanying LICENSE.txt file for terms.
+//
+var debug = require('debug')('keyserver');
+var app = require('../app');
+var appInternal = require('../app-internal');
+var config = require('../config.js');
+var https = require('https');
+var fs = require('fs');
+
+var port = process.env.PORT || config.port;
+var portInternal = process.env.PORT_INTERNAL || config.portInternal || port - 1;
+var host = process.env.HOST || config.host || '0.0.0.0';
+var localhost = config.hostInternal || "127.0.0.1";
+
+if (config.tls === 1) {
+  var options = {
+    key: fs.readFileSync(config.tlsKey),
+    cert: fs.readFileSync(config.tlsCert)
+  };
+  var optionsInternal = {
+    key: fs.readFileSync(config.internalTlsKey),
+    cert: fs.readFileSync(config.internalTlsCert)
+  };
+
+  var server = https.createServer(options, app).listen(port, host, function(){
+    console.log('HTTPS spartan server listening on port ' + server.address().port);
+  });
+  var serverInternal = https.createServer(optionsInternal, appInternal).listen(portInternal, localhost, function(){
+    console.log('Internal HTTPS spartan server listening on port ' + serverInternal.address().port);
+  });
+
+
+} else {
+  var server = app.listen(port, function() {
+    console.log('HTTP spartan server listening on port ' + server.address().port);
+  });
+  var serverInternal = appInternal.listen(portInternal, function() {
+    console.log('Internal HTTP spartan server listening on port ' + serverInternal.address().port);
+  });
+}
+

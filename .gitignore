@@ -1,0 +1,8 @@
+node_modules/
+*.key
+config.js.bkp
+*.swp
+*.swo
+*.log
+*.crt
+*.csr
