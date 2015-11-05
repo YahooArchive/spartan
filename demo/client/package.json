@@ -1,0 +1,18 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "Test client application for spartan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "spartan"
+  ],
+  "author": "Binu Ramakrishnan <rbinu@yahoo-inc.com>",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "request": "*",
+    "spartan": "file:../../lib/javascript/spartan/spartan-1.0.0.tgz"
+  }
+}

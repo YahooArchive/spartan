@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS `Apps` (`id` INTEGER auto_increment , `name` VARCHAR(128) , `description` VARCHAR(512), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `createdBy` VARCHAR(128), `updatedBy` VARCHAR(128), `ownedByUserGroup` VARCHAR(128), PRIMARY KEY (`id`, `name`)) ENGINE=InnoDB;
+SHOW INDEX FROM `Apps`;
+CREATE TABLE IF NOT EXISTS `AppInRoles` (`id` INTEGER NOT NULL auto_increment , `role` VARCHAR(32), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `createdBy` VARCHAR(128), `appName` VARCHAR(128), `roleName` VARCHAR(128), PRIMARY KEY (`id`)) ENGINE=InnoDB;
+SHOW INDEX FROM `AppInRoles`;
+CREATE TABLE IF NOT EXISTS `MemberInApps` (`id` INTEGER NOT NULL auto_increment , `identity` VARCHAR(4092), `identityType` VARCHAR(4092), `appName` VARCHAR(128), `createdBy` VARCHAR(128), `role` VARCHAR(32), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+SHOW INDEX FROM `MemberInApps`;
+CREATE TABLE IF NOT EXISTS `Roles` (`id` INTEGER auto_increment , `name` VARCHAR(128) , `roleType` VARCHAR(128), `roleHandle` VARCHAR(128), `description` VARCHAR(512), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `createdBy` VARCHAR(128), `updatedBy` VARCHAR(128), `ownedByUserGroup` VARCHAR(128), PRIMARY KEY (`id`, `name`)) ENGINE=InnoDB;
+SHOW INDEX FROM `Roles`;
+CREATE TABLE IF NOT EXISTS `Users` (`id` INTEGER auto_increment , `userid` VARCHAR(128) , `type` VARCHAR(32), `userkey` VARCHAR(4096), `name` VARCHAR(128), `createdBy` VARCHAR(128), `role` VARCHAR(32), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`, `userid`)) ENGINE=InnoDB;
+SHOW INDEX FROM `Users`;
+CREATE TABLE IF NOT EXISTS `UserGroups` (`id` INTEGER auto_increment , `name` VARCHAR(128) , `description` VARCHAR(512), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `createdBy` VARCHAR(128), `updatedBy` VARCHAR(128), PRIMARY KEY (`id`, `name`)) ENGINE=InnoDB;
+SHOW INDEX FROM `UserGroups`;
+CREATE TABLE IF NOT EXISTS `UserInGroups` (`id` INTEGER NOT NULL auto_increment , `userType` VARCHAR(128), `role` VARCHAR(32), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `userGroupName` VARCHAR(128), `userid` VARCHAR(128), `createdBy` VARCHAR(128), PRIMARY KEY (`id`)) ENGINE=InnoDB;
+SHOW INDEX FROM `UserInGroups`;
