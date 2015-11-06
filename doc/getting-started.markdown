@@ -10,36 +10,36 @@ To deploy spartan, the first step is to install spartan server. It provides prov
 
 ### Installation
 
-1. Start MySQL server 
+[1] Start MySQL server 
 
-2. Create a database for spartan service. This would look like:
+[2] Create a database for spartan service. This would look like:
 ```
 mysql> create database spartan;
 Query OK, 1 row affected (0.02 sec)
 ```
-3. Create a user, password for spartan application that can read/write to this database
+[3] Create a user, password for spartan application that can read/write to this database
 
-4. Install spartan server node application on your host.
+[4] Install spartan server node application on your host.
 ```
 $ npm install spartan-server
 ```
-5. Generate an ECDSA keypair using openssl
+[5] Generate an ECDSA keypair using openssl
 ```
 $ openssl ecparam -name secp256r1 -genkey -out priv.key
 $ openssl ec -in priv.key -pubout -out pub.key
 ```
 
-6. Update your [config.js][] as needed. Specifically, host/ip, port, database credentials, 
+[6] Update your [config.js][] as needed. Specifically, host/ip, port, database credentials, 
 ECDSA key paths, TLS cert and private key location.
 It is highly recommended to use TLS certificates signed by a public CA.
 
-7. Create/update the latest schema on the database
+[7] Create/update the latest schema on the database
 
 ```
 $ node syncdb.js
 ```
 
-8. Spartan server provides a simple user management API. For testing you may create users using spartan user management APIs.
+[8] Spartan server provides a simple user management API. For testing you may create users using spartan user management APIs.
 
 If you already have an existing identity management solution that supports OpenID Connect/JWT, spartan server can be easily configured to integrate with it.
 
@@ -53,7 +53,7 @@ $  curl -X POST -d 'userid=<userid>&userkey=<passwd>&createdBy=<admin@example.co
 ```
 This is assuming the spartan's user management API are running on localhost port 2999.
 
-9. At this point you can start spartan server
+[9] At this point you can start spartan server
 ```
 node bin/www
 ```
