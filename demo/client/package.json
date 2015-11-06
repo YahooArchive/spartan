@@ -13,6 +13,6 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "request": "*",
-    "spartan": "file:../../lib/javascript/spartan/spartan-1.0.0.tgz"
+    "spartan": "file:../../../spartan-node/spartan-1.0.0.tgz"
   }
 }
