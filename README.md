@@ -1,4 +1,6 @@
 # Spartan 
+**A Scalable Client Authentication & Authorization System for Container-based Environments**
+
 **[`Alpha release`]**
 
 <img src="./doc/highlevel-flow.png" width="650">
