@@ -1,11 +1,16 @@
 # Spartan Architecture
 
+
+### End to end flow
+
+<img src="./highlevel-flow.png">
+
 Spartan consists 3 components:
 
 1. A server component that is comprised of two services: 
 
-* Provisioner service
-* Attestation service
+* *Provisioner service*
+* *Attestation service*
 
 2. Command line tool - Used by a user to provision applications with provisioner service
 3. Client library. Provides language based APIs to your applications. Currently we have NodeJS and Go language bindings for spartan. The client APIs are used by client and server to fetch and validate AS tokens
@@ -24,5 +29,3 @@ Interface to these APIs are through the `spartan` command line tool.
 
 **Attestation service**
 The attestation service provides APIs that issues certificate tokens after verifying relationship between application and role 
-### End to end flow
-![alt tag](https://git.corp.yahoo.com/rbinu/spartan/blob/master/doc/highlevel-flow.png)

@@ -7,25 +7,24 @@
 // listen host
 exports.host = "<server hostname>"
 
-// this is for the admin interface
-// be careful if you want to open this for non-localhost
-exports.hostInternal = "127.0.0.1"
-
 // listen ports
 exports.port = 3000;
-exports.portInternal = 2999;
+exports.adminPort = 2999;
+
 // TLS settings
 // 1 => TLS enabled, (highly recommended)
 // 0 => TLS disabled (no TLS),
-exports.tls = 1;
+exports.tls = 0;
 exports.tlsKey = '/path/to/tls/private/key';
 exports.tlsCert = '/path/to/tls/public/cert';
-exports.internalTlsKey = 'local.key';
-exports.internalTlsCert = 'local.crt';
+
+// admin is running on localhost interface,so this may not be required.
+exports.adminTlsKey = '/path/to/tls/private/key';
+exports.adminTlsCert = '/path/to/tls/public/cert';
 
 // database
 exports.db_dialect = 'mysql'; // possible values: mysql, mariadb, sqlite, postgres, mssql
-exports.db_host = '<host>';
+exports.db_host = '127.0.0.1';
 exports.db_name = 'spartan';
 exports.db_user = '<user>';
 exports.db_passwd = '<password>';
@@ -34,13 +33,12 @@ exports.db_passwd = '<password>';
 // NOTE replace this keys when use in production.
 // This key as important as root CA signing key, so keep it safe!
 // TODO guildelines to secure private key
-exports.ecdsaPrivateKey = './keys/test-ES256-AS-privkey.pem';
-exports.ecdsaPublicKey = './keys/test-ES256-AS-pubkey.pem';
+exports.ecdsaPrivateKey = __dirname + '/keys/test-ES256-AS-privkey.pem';
+exports.ecdsaPublicKey = __dirname + '/keys/test-ES256-AS-pubkey.pem';
 
 // cert/token expiry - 24 hours
 exports.expiresIn = 86400;
 exports.algorithm = 'ES256';
 
 // options { 'prod', 'dev' } 
-exports.environment = 'dev';
-
+exports.environment = 'prod';

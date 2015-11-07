@@ -1,10 +1,13 @@
-# Spartan (alpha)
+# Spartan 
+**[`Alpha release`]**
+
+<img src="./doc/highlevel-flow.png" width="650">
 
 ## Background
 Container technologies are revolutionizing the way we develop, build and deploy applications in large scale production environments. Applications running in containers often need to connect to various internal/external services that require authentication and authorization. Authenticating client application to a server is a challenge in such dynamic environments because we cannot rely on traditional IP or hostname based checks. IP based authentication no longer works because (1) container IP is dynamic and often repurposed (2) containers often share IPs. Alternate options include the use of TLS client certs and other key based authentication schemes. TLS client certificates provide authentication, but not authorization capabilities by its own and is not easy to configure and operate at scale - think about CICD pipeline spawning hundreds of containers that live only for few minutes!
 
 ## What is spartan
-Spartan is a role based identity system that provides both authentication and authorization to clients in a fully-automated, easy to configure, scalable fashion. The system comprises of 
+Spartan is a role based identity system that provides both authentication and authorization to clients in an automated, easy to configure, scalable fashion. The system comprises of 
 
 * Command line tools and APIs for node and application provisioners to manage and publish public key fingerprints
 * Provisioner service that provides grouping of public key fingerprints of nodes/applications to roles that represents a capability
@@ -29,7 +32,7 @@ Spartan would be useful if you have experienced any of the following problems:
 * Easy to deploy and use
 * Easy to integrate with corp identity systems
 * Applications can authentice over non-secure network (HTTP)
-* Extend to fit your requirements. For example, you may write a reverse and forward proxies spartan plugins
+* Extend to fit your requirements. For example, you may write a reverse and forward proxy spartan plugins
 * Protection against replay attacks and scoped capabilities
 
 ## Getting Started
@@ -39,7 +42,7 @@ Please refer to [Getting Started Guide][]
 Following are the Spartan API language bindings.
 APIs are available to
 
-1. Get tokens from attestation server (typically needed on your client application)
+1. Get tokens from attestation service (typically needed on your client application)
 2. Validate tokens received in the request(typically needed on your server which accepts requests)
 
 * [Go](https://github.com/yahoo/spartan-go)

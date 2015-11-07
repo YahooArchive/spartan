@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+//
+// Copyright 2015, Yahoo Inc.
+// Copyrights licensed under the New BSD License. See the
+// accompanying LICENSE.txt file for terms.
+//
+
+"use strict";
+var debug = require('debug')('spartan');
+var adminApp = require('../app-admin');
+var config = require('../config.js');
+var https = require('https');
+var fs = require('fs');
+
+var adminPort = config.adminPort,
+    localhost = "127.0.0.1";
+
+if (config.tls === 1) {
+  var options = {
+    key: fs.readFileSync(config.adminTlsKey),
+    cert: fs.readFileSync(config.adminTlsCert)
+  };
+
+  var adminServer = https.createServer(optionsInternal, adminApp)
+                         .listen(adminPort, localhost, function() {
+    console.log('Internal HTTPS spartan server listening on localhost port '
+                                                 + adminServer.address().port);
+    console.log('IMPORTANT : This is an admin interface only for adding new user accounts');
+    console.log('IMPORTANT : Shut it down immedietely after you add/remove users');
+  });
+
+} else {
+  var adminServer = adminApp.listen(adminPort, function() {
+    console.log('HTTP spartan admin server listening on localhost port '
+                                                 + adminServer.address().port);
+    console.log('IMPORTANT : This is an admin interface for only adding new user accounts');
+    console.log('IMPORTANT : Shut it down immedietely after you add/remove users');
+  });
+}
+

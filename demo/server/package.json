@@ -12,6 +12,6 @@
     "express": "~4.9.0",
     "jsonwebtoken": "~5.4.0",
     "morgan": "~1.3.0",
-    "spartan": "file:../../lib/javascript/spartan/spartan-1.0.0.tgz"
+    "spartan": "file:../../../spartan-node/spartan-1.0.0.tgz"
   }
 }
