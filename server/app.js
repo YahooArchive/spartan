@@ -13,7 +13,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config.js');
 
-var routes = require('./routes/index');
 var user_group = require('./routes/user-group');
 var app_group = require('./routes/app-group');
 var role_group = require('./routes/role-group');
@@ -21,8 +20,6 @@ var att_svc = require('./routes/attestation-service');
 
 var app = express();
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -31,7 +28,6 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
 app.use('/v1/usergroup', user_group);
 app.use('/v1/app', app_group);
 app.use('/v1/role', role_group);

@@ -11,4 +11,5 @@ models.sequelize.sync({
   logging: console.log
 }).then(function () {
   console.log("DB Sync done..");
+  process.exit(0);
 });

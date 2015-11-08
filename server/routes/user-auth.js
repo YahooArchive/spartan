@@ -11,10 +11,11 @@ var bcrypt = require('bcrypt');
 var spartan = require('spartan');
 var fs = require('fs');
 var config = require('../config');
-var as_pubkey = fs.readFileSync(config.ecdsaPublicKey);
 var utils = require('./router-utils');
 var models = require('../models');
 
+// Identity provider's public key
+var IP_pubkey = fs.readFileSync(config.IPPublicKey);
 
 module.exports = {
 
@@ -35,12 +36,12 @@ module.exports = {
   // Example usage - check routes/ca-server.js
   verify: function (req, res, next) {
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers[
-        'x-spartan-auth-token'],
+    var token = req.body.token || req.query.token ||
+                                  req.headers['x-spartan-auth-token'],
       decoded;
 
     if (token) {
-      decoded = spartan.tokenVerify(token, as_pubkey);
+      decoded = spartan.tokenVerify(token, IP_pubkey);
       if (decoded.success === true) {
         req.token = decoded.data;
         next();
