@@ -69,7 +69,7 @@ The commands and options currently supported by the CLI are listed in [spartan C
 
 ## Sample App, Role, UserGroup provisioning
 
-Check out [sample-provision.sh](https://github.com/yahoo/spartan-go/blob/master/sample-provision.sh) which demonstrates commands to provision and associate app, usergroup and roles
+Check out [sample-provision.sh](https://github.com/yahoo/spartan-go/blob/master/utils/spartan/sample-provision.sh) which demonstrates commands to provision and associate app, usergroup and roles
 
 [config.js]: ../src/config.js
 
