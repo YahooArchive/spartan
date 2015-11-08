@@ -1,7 +1,7 @@
 #Security
 [note: This repo is WIP and may not have all secuirty features implemented]
 
-Spartan IS a security infrastrcture. The system is designed to protect against various attacks such as Man-in-the-Middle (MITM), token tampering/spoofing attacks
+Spartan IS a security infrastructure. The system is designed to protect against various attacks such as Man-in-the-Middle (MITM), token tampering/spoofing attacks
 
 The threat landscape for a system like spartan is pretty large. We consciously opt not to solve all peripheral security problems, instead focused on security of tokens and token exchange protocols that are core to our system. For example, though the expectation is to store app private key securely, we don't control the way you store and distribute. Our APIs do not accept key file paths, instead it accepts the keys loaded in memory. In that way you can distribute and store the keys securely in a way specific to your environment.
 
@@ -9,13 +9,13 @@ The threat landscape for a system like spartan is pretty large. We consciously o
 
 * Users who use spartan for their applications - by creating mappings between apps and roles. A user compromise can affect apps and role that person’s usergroup owns 
 
-* Spartan admins: Spartan admins are the super users with complete control over spartan system. If admin accounts are compromised, then its game over.
+* Spartan admins: Spartan admins are the super users with complete control over spartan system. If an admin account is compromised, then its game over.
 
 * Client or server applications: If the client is compromised, it may impersonate the client to server
 
-User and admin compromise is a generic problem. There are different ways to mitigate those risks, such as enable second factor authentication, use short lived credentials etc. 
+User and admin compromise is a generic problem. There are different ways to mitigate those risks, such as enabling second factor authentication, using short lived credentials, etc. 
 
-The client or a server host compromise is also a generic problem. It often occurs when your application has security vulnerabilities. The impact of an exploit also varies. The mitigation is to follow best security practices and above all follow good security hygiene when developing and deploying applications, and managing hosts.
+The client or a server host compromise is also a generic problem. It often occurs when an application has security vulnerabilities. The impact of an exploit also varies. The mitigation is to follow best security practices and above all follow good security hygiene when developing and deploying applications, and managing hosts.
 
 ###What is in scope?
 The main feature of spartan is to protect a resource (e.g. a service endpoint) from unauthorized access. The threat model is to enumerate all attacks and build defenses against those attacks.
@@ -34,7 +34,7 @@ Spartan does not have direct protection against (4) and (5). Instead to mitigate
 This is one of the main focus of our threat model. Given that the adversary is able to capture the request and replay it, how can we protect against such attacks
 
 * The recommended solution is to use TLS for transport security. This will provide protection against active eavesdropping attacks.
-* If the network communication is not protected (e.g. HTTP), the spartan provides protection by: 
+* If the network communication is not protected (e.g. HTTP),  spartan provides protection by: 
   * Auth tokens are signed with client’s private key and are not reused (use nonce and short expiry). The server will cache nonce untill its expiry
   * Sign the request body with client’s private key so that the adversary cannot modify the request in transit
 
