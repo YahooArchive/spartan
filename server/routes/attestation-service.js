@@ -66,7 +66,7 @@ router.get('/tokens', [sp_handlr.asAuth.bind(sp_handlr)], function (req, res) {
         ret = spartan.tokenSign({
           sub: req.token.sub,
           iss: 'spartan-domain',
-          exp: config.expiresIn,
+          exp: config.expiresIn, //TODO: exp should be min(config.expiresIn, expiry of identity)
           algorithm: config.algorithm
         }, data, as_privkey);
 
