@@ -50,17 +50,24 @@ The nonce are generated using crypto random number generator functions and token
 ##Identity
 An application instance is represented using its public key fingerprint (SHA256), The identity of the application instance is based on its private key, that means the knowledge of a private key is considered as a proof of identity. It is possible to impersonate a client if an intruder steals the private key from the application host.
 
-
 **Mitigation**
 
-1. The private keys are generated inside the container or VM and the keys never leave the host.
-2. Soft check based on connecting client IP to see if the same keys are used elsewhere. The client IP is also attached to the AS token. This is not a strong assertion, but it can flag some potential issues. 
-3. Key should not be repurposed or shared. In the world of dynamic provisioning, keys never persist for long period.
+1. Generate key pairs inside container or VM, and the private key should not leave the host.
+2. Key should not be repurposed or shared. In the world of dynamic provisioning, keys never persist for long period.
+3. Soft check based on connecting client IP to see if the same keys are used elsewhere. The client IP is also attached to the AS token. This is not a strong assertion, but it can flag some potential issues. 
 
 ## Trust
-An identity (a self-signed token) by itself is not trusted or has no meaning. The trust is established only when it is mapped to a spartan app or a role in the provisioner server. The mapping of an identity (e.g. pub key fingerprint) with spartan app is managed by the user who owns the spartan app and the application identity.
+A self-signed token by itself is not trusted or has no meaning. The trust is derived when it mapped to a spartan app or a role in the provisioner server. The app or the role's trust is derived from the user (user group) who owns it. 
 
-The AS token issued by the attestation service is actually the assertion of application’s membership with spartan app. An application is trusted because it is a member of spartan app owned and governed by a user group. The trust is chained from the application to the user and the trust is established through this chain. Spartan is the trust enabler between an application and its owner.
+AS token issued by attestation service binds application identity with its public key (fingerprint). The identity of the application is established from its app or role membership.
 
 ###Authorization
-The authorization is provided by AStoken issued by AS. AS upon receving request from clients, AS authenticates the request by verifying client's self-signed token received as part of the request. It then extract the subject field (public key fp) in the token and try to match with all mapped roles. If found, AS issues a token that asserts that the application is a member of requested role. Client can use this token to access a protected service. The AStoken is scoped to a role, hence this token cannot to use to access other services/resources
+**Client -> Attestation service**
+
+The authorization is provided by AStoken issued by attestation service. AS upon receving request from clients, authenticates the request by verifying client's self-signed token received as part of the request. It then extracts the subject ('sub') field (contains SHA256 public key fp) in the token and try to match with all mapped roles. If found, AS issues a token that asserts that the application is a member of requested role. Client can use this token to access a service protected by that role. The AStoken is scoped to a role, hence this token cannot to use to access other services/resources
+
+**Client -> Server**
+
+The client application self signs the AStoken and pass it as part of the request to access a protected service. The server application recevies the request, validate AStoken with AS public key. It also validates the client signature using the public key embedded in the request token. The server then computes a SHA256 of the client's public key embedded in the token and compare it with the SHA256 fingerprint embedded in the AS token (JWT 'sub' field). The client signature is trusted only if the fingerprints are same. Server also make sure the application is part of the server role before granting access. To thwart replay attacks, tokens are not reused and the token nonce is stored in the server side untill the token's expiry 
+
+AStokens can be directly passed (with out client's signature) if the communication channel is secured (HTTPS). This will avoid the need to use new token for every request.
