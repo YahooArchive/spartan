@@ -32,8 +32,10 @@ var sp_handlr = new spartan.RouteHandler({
  */
 router.get('/tokens', [sp_handlr.asAuth.bind(sp_handlr)], function (req, res) {
 
-  models.sequelize.query(
-    "select roleName from AppInRoles where appName in (select appName from MemberInApps where identity= :identity )", {
+  var query = 'select distinct roleName, attribute from AppInRoles where appName in' +
+              ' (select appName from MemberInApps where identity= :identity )';
+
+  models.sequelize.query(query, {
       replacements: {
         identity: req.token.sub
       },
@@ -51,30 +53,62 @@ router.get('/tokens', [sp_handlr.asAuth.bind(sp_handlr)], function (req, res) {
       },
       data,
       ret,
-      i;
+      i,
+      j,
+      cond;
+
+    var uroles = [];
 
     for (i in roles) {
+      cond = false;
       if (roles.hasOwnProperty(i)) {
-        console.log(roles[i].roleName);
+        //console.log(roles[i].roleName);
+        //console.log(roles[i].attribute);
+        for (j = 0; j < uroles.length; j++) {
+          if (uroles[j].role === roles[i].roleName) {
+            uroles[j].attr.push(roles[i].attribute);
+            cond = true;
+            break;
+          }
+        }
+
+        if (cond) {
+          cond = false;
+          continue;
+        }
+
         data = {
           ver: 1,
           type: 'as-app-token',
           role: roles[i].roleName,
+          attr: [ roles[i].attribute ],
           ip: req.connection.remoteAddress
         };
+
+        uroles.push(data);
+      }
+    }
+
+    for (i in uroles) {
+      if (uroles.hasOwnProperty(i)) {
+        //console.log(uroles[i].role);
+        console.log(JSON.stringify(uroles[i]));
 
         ret = spartan.tokenSign({
           sub: req.token.sub,
           iss: 'spartan-domain',
           exp: config.expiresIn, //TODO: exp should be min(config.expiresIn, expiry of identity)
           algorithm: config.algorithm
-        }, data, as_privkey);
+        }, uroles[i], as_privkey);
 
-        console.log(ret.token);
-        tokens.tokens.push({
-          role: roles[i].roleName,
-          astoken: ret.token
-        });
+        if (ret.success) {
+          console.log(ret.token);
+          tokens.tokens.push({
+            role: roles[i].roleName,
+            astoken: ret.token
+          });
+        }
+
         return router_utils.sendSuccessResponseJSON(res, tokens);
       }
     }

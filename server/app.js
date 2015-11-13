@@ -11,8 +11,9 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var config = require('./config.js');
+var config = require('./config');
 
+var routes = require('./routes/index');
 var user_group = require('./routes/user-group');
 var app_group = require('./routes/app-group');
 var role_group = require('./routes/role-group');
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', routes);
 app.use('/v1/usergroup', user_group);
 app.use('/v1/app', app_group);
 app.use('/v1/role', role_group);
