@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+- '4.1'
+- '4.0'
+- '0.12'
+- '0.11'
+- '0.10'
+notifications:
+  email:
+    recipients:
+    - a.mahendrakar@yahoo.com
+  on_success: change
+  on_failure: always
+after_success:
+- test $(cat $TRAVIS_BUILD_DIR/package.json | grep version | awk '{print $2}' | sed 's/"//g' | sed 's/,//g' | awk '{print "v"$1}' ) = $TRAVIS_TAG && test $(echo $TRAVIS_NODE_VERSION | awk '{print $1}' ) = '0.12' && export VALID_VERSION=true
+deploy:
+  provider: npm
+  email: a.mahendrakar@yahoo.com
+  api_key:
+    secure: vtgw1h09vxTfht4Ybo8xct0hIxJ99qw4g1ug4EW2+hrOmHD0jvnwNomA2wq74ErnNDJpadji/96q7jjiredrCFtXJr+jJfgWvz9Dj/3DYka5BLZf3mXt4sSZsIa8a4qd4yjps8LSTz8Zn+NdamBmJZF/Tyw1p/KqijpQ8uUt2sN8Oil9Fgb4fZ5cq5Xhv431VqjHD0Q21HB2GDgEFJxCvy5tXCKOfmTwzox/fwf9gTyrkYB27v9UTGxdqJqHrVuPRuaqbOuGIHNfRLc8qZAbtjp/DQmvf/itsI49Pxkm9LERCCAxVum60EEm79VYjSqnpC05ybYW1XjMrScY9Sqz2VBfftZa1bj7awqHw/K2aDmmSjzc7CUK7aJ1pQVy+xmdp9Je+aHqMlYvzy2HLLQYt4SZSn3zaTQFl2x3tkyivaY5i/b/Rf5BasaNxm2fPYI0QVyOZBXojPPULiHqyDdLrMKOpT13n7olPWbTkwwuI++eixP2OqJiSRlMtn3L4Y27x028LgJJaecueVhtrGnC7+9CClod6V4nJvbS2oTWRsP5s8O4A0vfCVGd6fhd7MhOVjR9Wz6jMxKkMrylWYEB6U5lqauQykYVXHl4ndnh/8vTzHWYCKzOm6kd60qQ0DPEzHfFPCVXYN2tPYzML1sFzNl1kCv0kBtTk705cTO3heA=
+  on:
+    condition: $VALID_VERSION = true
+    tags: true
+    branch: master
+sudo: false

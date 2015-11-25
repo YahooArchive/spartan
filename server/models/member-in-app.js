@@ -8,8 +8,8 @@
 module.exports = function(sequelize, DataTypes) {
     var MemberInApp = sequelize.define("MemberInApp", {
         identity: {
-            type: DataTypes.STRING(1024),
-            unique: true,
+            type: DataTypes.STRING(512),
+            unique: false,
             allowNull: false
         },
         identityType: {

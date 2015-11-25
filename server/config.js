@@ -36,6 +36,12 @@ exports.db_passwd = '<password>';
 exports.ecdsaPrivateKey = __dirname + '/keys/test-ES256-AS-privkey.pem';
 exports.ecdsaPublicKey = __dirname + '/keys/test-ES256-AS-pubkey.pem';
 
+// Identity Provider's (IP) public key.
+// If the IP is spartan, then provide private key
+exports.IPPrivateKey= __dirname + '/keys/test-ES256-AS-privkey.pem';
+// Public key of the IP
+exports.IPPublicKey= __dirname + '/keys/test-ES256-AS-pubkey.pem';
+
 // cert/token expiry - 24 hours
 exports.expiresIn = 86400;
 exports.algorithm = 'ES256';

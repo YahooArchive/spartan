@@ -11,7 +11,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var config = require('./config.js');
+var config = require('./config');
 
 var routes = require('./routes/index');
 var user_group = require('./routes/user-group');
@@ -21,8 +21,6 @@ var att_svc = require('./routes/attestation-service');
 
 var app = express();
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

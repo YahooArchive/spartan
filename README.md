@@ -1,5 +1,17 @@
 # Spartan 
-**[`Alpha release`]**
+**A Scalable Client Authentication & Authorization System for Container-based Environments**
+
+**[Alpha release, not production ready]**
+
+[![npm version][npm-badge]][npm]
+[![dependency status][dep-badge]][dep-status]
+[![Build Status](https://travis-ci.org/yahoo/spartan.svg?branch=master)](https://travis-ci.org/yahoo/spartan)
+
+[npm]: https://www.npmjs.org/package/spartan-server
+[npm-badge]: https://img.shields.io/npm/v/spartan-server.svg?style=flat-square
+[dep-status]: https://david-dm.org/yahoo/spartan
+[dep-badge]: https://img.shields.io/david/yahoo/spartan.svg?style=flat-square
+
 
 <img src="./doc/highlevel-flow.png" width="650">
 
@@ -15,8 +27,8 @@ Spartan is a role based identity system that provides both authentication and au
 
 Your server application (service provider) maps the role with service specific capabilities and the requests are validated against the auth tokens placed by the client while making requests to the server. The system is designed from ground up based on our experience with an existing IP based authorization system, keeping practicality, flexibility and security in mind. The implementation makes use of modern security and crypto practices and such as ECDSA and JWT.
 
-### Is spartan a replacement for PKI and TLS ?
-Spartan is complimentary to TLS. Spartan's primary goal is to enable client authentication and authorization capabilities. However it can provide mutual authentication as well. TLS is recommended for server authentication and transport security. TLS for client authentication is possible but is hard to do at scale, especially in dynamic environments. Authorization capabilities in TLS certificates is also limited, if not impossible. Spartan is light weight form of PKI that provides identity, authentication and authorization capabilities. Transport security is also possible with ECDHE key exchange.
+### Is spartan a replacement for TLS in my application ?
+Spartan is complimentary to TLS. Spartan's primary goal is to enable client authentication and authorization capabilities. However it can provide mutual authentication as well. TLS is recommended for server authentication and transport security. TLS for client authentication is possible but is hard to operationalize at scale, especially in dynamic environments. Authorization capabilities in TLS certificates is also limited, if not impossible. Spartan is light weight form of PKI that provides identity, authentication and authorization capabilities. Transport security is also possible with ECDHE key exchange.
 
 ## Is this something for me?
 Spartan would be useful if you have experienced any of the following problems:
@@ -49,3 +61,6 @@ APIs are available to
 * [Node.JS](https://github.com/yahoo/spartan-node)
 
 [Getting Started Guide]: doc/getting-started.markdown
+
+## Acknowledgements
+Yahoo Paranoids team

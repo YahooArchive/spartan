@@ -222,7 +222,7 @@ router.post('/addmember', [auth.verify, auth.authzUserRole], function (req, res)
     models.AppInRole.create({
       roleName: roleName,
       appName: appName,
-      attribute: attribute || '',
+      attribute: attribute || 'default',
       createdBy: createdBy
     }).then(function () {
       return router_utils.sendSuccessResponse(res, {

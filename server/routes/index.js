@@ -14,26 +14,21 @@ var jwt = require('jsonwebtoken');
 var config = require('../config.js');
 var models = require('../models');
 var auth = require('./user-auth');
-var spartan = require('spartan');
+var spartan = require('spartan-api');
 var SpartanECDH = require('spartan/ecdh');
 
 var crypto = require('crypto');
 
-var as_privkey = fs.readFileSync(config.ecdsaPrivateKey);
-var as_pubkey = fs.readFileSync(config.ecdsaPublicKey);
-
-var spartan_handlr = new spartan.RouteHandler({
-  as_url: 'http://localhost:3000/v1/as/tokens',
-  as_pubkey: as_pubkey,
-  role: 'SuperRole'
-});
-
+// identity provider public key.
+// TODO support more than one identity provider
+var IP_privkey = fs.readFileSync(config.IPPrivateKey);
+var IP_pubkey = fs.readFileSync(config.IPPublicKey);
 
 // exchange password to get a JWT token. This is ideally inmplemented by
 // as part of your single sign-on. Ideally this functionality should be 
 // implemented by corp employee auth servers. To keep it easy for our users,
 // the auth is based on a sharet secret.
-// example: curl -X POST -d 'user=rbinu@yahoo-inc.com&passwd=ASADFVEFVSERNMUHBSEFIHHDRVV' localhost:3000/v1/auth/token
+// example: curl -X POST -d 'user=user@example.com&passwd=ABCDEFGHIJ' localhost:2999/v1/auth/token
 router.post('/v1/auth/token', function (req, res) {
 
   if ((!req.body.userid) || (!req.body.passwd)) {
@@ -61,7 +56,7 @@ router.post('/v1/auth/token', function (req, res) {
           iss: 'spartan-domain',
           exp: config.expiresIn,
           alg: config.algorithm
-        }, data, as_privkey);
+        }, data, IP_privkey);
 
       if (resp.success) {
         return res.json({
@@ -84,29 +79,6 @@ router.post('/v1/auth/token', function (req, res) {
 
     return;
 
-  });
-});
-
-// Experimental ECDHE. 
-// Given that we can authenticate both client and server
-// the client can make a request to server and negotiate a secret  
-// between client and server over an insecure channel. This secret
-// can be used to encrypt contents or generate secure short tokens.
-// The client code is at lib/client/ecdhe.js
-// Modified version of:
-// https://gist.github.com/moshest/7d27848b2bbc45c40d67
-router.post('/v1/auth/ecdh', [spartan_handlr.svcAuth], function (req, res) {
-
-  var ecdh = new SpartanECDH(),
-    secret = ecdh.getSharedSecret(req.body.public_key);
-
-  //console.log('Secret: ' + secret);
-
-  // TODO we also need to pass service (role's) cert token
-  // back to client for server authentication.
-  res.status(200).json({
-    token: 'server token placeholder',
-    public_key: ecdh.getPublicKey()
   });
 });
 
