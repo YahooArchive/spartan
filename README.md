@@ -3,6 +3,16 @@
 
 **[Alpha release, not production ready]**
 
+[![npm version][npm-badge]][npm]
+[![dependency status][dep-badge]][dep-status]
+[![Build Status](https://travis-ci.org/yahoo/spartan.svg?branch=master)](https://travis-ci.org/yahoo/spartan)
+
+[npm]: https://www.npmjs.org/package/spartan-server
+[npm-badge]: https://img.shields.io/npm/v/spartan-server.svg?style=flat-square
+[dep-status]: https://david-dm.org/yahoo/spartan
+[dep-badge]: https://img.shields.io/david/yahoo/spartan.svg?style=flat-square
+
+
 <img src="./doc/highlevel-flow.png" width="650">
 
 ## Background

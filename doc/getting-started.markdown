@@ -91,3 +91,4 @@ $ cd demo/client
 $ node auth-test.js
 { msg: 'app is authenticated!' }
 ```
+

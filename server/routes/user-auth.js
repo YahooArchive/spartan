@@ -8,7 +8,7 @@
 
 "use strict";
 var bcrypt = require('bcrypt');
-var spartan = require('spartan');
+var spartan = require('spartan-api');
 var fs = require('fs');
 var config = require('../config');
 var utils = require('./router-utils');

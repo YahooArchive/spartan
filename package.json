@@ -1,0 +1,46 @@
+{
+  "name": "spartan-server",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "node ./server/bin/www",
+    "test": "echo \"TODO: Add tests here.\" && exit 0"
+  },
+  "keywords": [
+    "spartan",
+    "authorization",
+    "authentication",
+    "auth",
+    "container"
+  ],
+  "author": {
+    "name": "Binu Ramakrishnan"
+  },
+  "contributors": [
+    {"name": "Aditya Mahendrakar"}, 
+    {"name": "Binu Ramakrishnan"}
+  ],
+  "bugs": {
+    "url": "https://github.com/yahoo/spartan/issues"
+  },
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "~1.8.1",
+    "cookie-parser": "~1.3.3",
+    "debug": "~2.0.0",
+    "express": "~4.9.0",
+    "jade": "~1.6.0",
+    "jsonwebtoken": "~5.4.0",
+    "jws": "^2.0.0",
+    "morgan": "~1.3.0",
+    "request": "^2.65.0",
+    "sequelize": "~3.12.0",
+    "serve-favicon": "~2.1.3",
+    "spartan-api": "~0",
+    "mysql": "^2.9.0",
+    "request": "^2.65.0",
+    "sequelize": "~3.12.0",
+    "serve-favicon": "~2.1.3"
+  },
+  "description": "Spartan - A Scalable Client Authentication & Authorization System for Container-based Environments"
+}

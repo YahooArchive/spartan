@@ -7,7 +7,7 @@
 
 "use strict";
 var fs = require('fs');
-var spartan = require('spartan');
+var spartan = require('spartan-api');
 var SpartanECDH = require('spartan/ecdh');
 var request = require('request');
 var svc_url = 'http://localhost:3001/v1/service/auth-test';
