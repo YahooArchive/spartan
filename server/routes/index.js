@@ -15,7 +15,6 @@ var config = require('../config.js');
 var models = require('../models');
 var auth = require('./user-auth');
 var spartan = require('spartan-api');
-var SpartanECDH = require('spartan/ecdh');
 
 var crypto = require('crypto');
 

@@ -5,6 +5,9 @@
     "start": "node ./server/bin/www",
     "test": "echo \"TODO: Add tests here.\" && exit 0"
   },
+  "bin": {
+    "spartan-server": "./server/bin/www"
+  },
   "keywords": [
     "spartan",
     "authorization",
