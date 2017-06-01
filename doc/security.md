@@ -1,11 +1,11 @@
-#Security
+# Security
 [note: This repo is WIP and may not have all secuirty features implemented]
 
 Spartan IS a security infrastructure. The system is designed to protect against various attacks such as Man-in-the-Middle (MITM), token tampering/spoofing attacks
 
 The threat landscape for a system like spartan is pretty large. We consciously opt not to solve all peripheral security problems, instead focused on security of tokens and token exchange protocols that are core to our system. For example, though the expectation is to store app private key securely, we don't control the way you store and distribute. Our APIs do not accept key file paths, instead it accepts the keys loaded in memory. In that way you can distribute and store the keys securely in a way specific to your environment.
 
-###What is not in scope
+### What is not in scope?
 
 * Users who use spartan for their applications - by creating mappings between apps and roles. A user compromise can affect apps and role that person’s usergroup owns 
 
@@ -17,7 +17,7 @@ User and admin compromise is a generic problem. There are different ways to miti
 
 The client or a server host compromise is also a generic problem. It often occurs when an application has security vulnerabilities. The impact of an exploit also varies. The mitigation is to follow best security practices and above all follow good security hygiene when developing and deploying applications, and managing hosts.
 
-###What is in scope?
+### What is in scope?
 The main feature of spartan is to protect a resource (e.g. a service endpoint) from unauthorized access. The threat model is to enumerate all attacks and build defenses against those attacks.
 
 *So how an attacker can gain access to a spartan protected service endpoint?*
@@ -47,7 +47,7 @@ Spartan is using modern crypto technologies such as JWT and ECDSA algorithms. Th
 
 The nonce are generated using crypto random number generator functions and tokens are basically json web tokens (JWT)
 
-##Identity
+## Identity
 An application instance is represented using its public key fingerprint (SHA256), The identity of the application instance is based on its private key, that means the knowledge of a private key is considered as a proof of identity. It is possible to impersonate a client if an intruder steals the private key from the application host.
 
 **Mitigation**
@@ -61,7 +61,7 @@ A self-signed token by itself is not trusted or has no meaning. The trust is der
 
 AS token issued by attestation service binds application identity with its public key (fingerprint). The identity of the application is established from its app or role membership.
 
-###Authorization
+### Authorization
 **Client -> Attestation service**
 
 The authorization is provided by AStoken issued by attestation service. AS upon receving request from clients, authenticates the request by verifying client's self-signed token received as part of the request. It then extracts the subject ('sub') field (contains SHA256 public key fp) in the token and try to match with all mapped roles. If found, AS issues a token that asserts that the application is a member of requested role. Client can use this token to access a service protected by that role. The AStoken is scoped to a role, hence this token cannot to use to access other services/resources
