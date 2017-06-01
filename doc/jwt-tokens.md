@@ -1,5 +1,5 @@
 
-##Spartan JWT Types
+## Spartan JWT Types
 
 Spartan heavily uses JSON Web Tokens (JWT) for authentication and authorization. It currently supports four types of tokens:
 
