@@ -3,6 +3,8 @@
 
 **[Alpha release, not production ready]**
 
+USENIX UCMS 2015 Presentation slides: [here](https://www.slideshare.net/BinuRamakrishnan/a-scalable-client-authentication-authorization-service-for-containerbased-environments)
+
 [![npm version][npm-badge]][npm]
 [![dependency status][dep-badge]][dep-status]
 [![Build Status](https://travis-ci.org/yahoo/spartan.svg?branch=master)](https://travis-ci.org/yahoo/spartan)
@@ -40,6 +42,7 @@ Spartan would be useful if you have experienced any of the following problems:
 
 ## Features
 
+* No key management hassles. Private keys are not distributed, passed around or reused
 * Based on open standards - JSON Web Tokens, OpenID Connect, ECDSA etc.
 * Easy to deploy and use
 * Easy to integrate with corp identity systems
