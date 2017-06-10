@@ -1,9 +1,11 @@
 # Spartan 
-**A Scalable Client Authentication & Authorization System for Container-based Environments**
+## A Scalable Client Authentication & Authorization System for Container-based Environments
 
-**[Alpha release, not production ready]**
+[Alpha release, not production ready]
 
-USENIX UCMS 2015 Presentation slides: [here](https://www.slideshare.net/BinuRamakrishnan/a-scalable-client-authentication-authorization-service-for-containerbased-environments)
+*USENIX UCMS 2015 Presentation slides: [here](https://www.slideshare.net/BinuRamakrishnan/a-scalable-client-authentication-authorization-service-for-containerbased-environments)*
+
+*An X509 based architecture called SpartanX is described [here](https://github.com/yahoo/spartan/blob/master/doc/spartanX.md)*
 
 [![npm version][npm-badge]][npm]
 [![dependency status][dep-badge]][dep-status]
@@ -31,6 +33,8 @@ Your server application (service provider) maps the role with service specific c
 
 ### Is spartan a replacement for TLS in my application ?
 Spartan is complimentary to TLS. Spartan's primary goal is to enable client authentication and authorization capabilities. However it can provide mutual authentication as well. TLS is recommended for server authentication and transport security. TLS for client authentication is possible but is hard to operationalize at scale, especially in dynamic environments. Authorization capabilities in TLS certificates is also limited, if not impossible. Spartan is light weight form of PKI that provides identity, authentication and authorization capabilities. Transport security is also possible with ECDHE key exchange.
+
+[**Update**] *An X509 based architecture called SpartanX is described [here](https://github.com/yahoo/spartan/blob/master/doc/spartanX.md)*
 
 ## Is this something for me?
 Spartan would be useful if you have experienced any of the following problems:
