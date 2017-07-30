@@ -2,7 +2,7 @@
 (Originally conceived in Dec-2015)
 
 ## A Reference Architecture for:
- 1. Bootstrapping application identity
+ 1. Bootstrapping application/service identity (See detailed description here: [identity-bootstrapping.md](https://github.com/yahoo/spartan/blob/master/doc/identity-bootstrapping.md))
  2. Short-lived TLS X509 Certificates
  2. X509 Certificate based service authorization
 
