@@ -1,6 +1,8 @@
 # Spartan 
 ## A Scalable Client Authentication & Authorization System for Container-based Environments
 
+**Please note:** This repo contains known security vulnerabilities. Use at your own risk!
+
 [Alpha release, not production ready]
 
 *USENIX UCMS 2015 Presentation slides: [here](https://www.slideshare.net/BinuRamakrishnan/a-scalable-client-authentication-authorization-service-for-containerbased-environments)*
